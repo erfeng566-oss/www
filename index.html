@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>虎尾科技大學校園地圖與統計</title>
+    <!-- 引入 Chart.js 用來製作下方的長條圖 -->
+    <script src="https://jsdelivr.net"></script>
+    <style>
+        body {
+            font-family: "Helvetica Neue", Arial, "Noto Sans TC", sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container {
+            max-width: 1000px;
+            width: 100%;
+            background-color: #ffffff;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            padding: 20px;
+            box-sizing: border-box;
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 15px;
+            text-align: center;
+            border-bottom: 2px solid #eaeaea;
+            padding-bottom: 8px;
+        }
+
+        /* 地圖區域樣式 */
+        .map-box {
+            width: 100%;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .map-box img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 4px;
+        }
+
+        /* 圖表區域樣式 */
+        .chart-box {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .chart-title {
+            font-size: 18px;
+            color: #555;
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+
+        .canvas-container {
+            position: relative;
+            width: 100%;
+            max-width: 700px;
+            height: 400px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- 上半部：校園地圖 -->
+        <div class="map-box">
+            <div class="section-title">國立虎尾科技大學 校園地圖</div>
+            <!-- 這裡使用虎科大官方公開的地圖圖片網址 -->
+            <img src="https://ncut.edu.tw" onerror="this.src='https://unsplash.com'" alt="虎科大校園地圖">
+        </div>
+
+        <!-- 下半部：統計圖表 -->
+        <div class="chart-box">
+            <div class="section-title">數據統計圖表</div>
+            <div class="chart-title">hi</div>
+            <div class="canvas-container">
+                <canvas id="myChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 設定與繪製與您截圖中一模一樣的長條圖
+        const ctx = document.getElementById('myChart').getContext('2d');
+        const myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['h', 'e', 'l', 'l', 'o'], // 下方的英文字母
+                datasets: [{
+                    data: [55, 49, 44, 24, 15], // 對應長條圖的高度數值
+                    backgroundColor: [
+                        '#d32f2f', // 紅色 (h)
+                        '#388e3c', // 綠色 (e)
+                        '#1976d2', // 藍色 (l)
+                        '#fbc02d', // 黃色 (l)
+                        '#7b1fa2'  // 棕紫色 (o)
+                    ],
+                    borderWidth: 0,
+                    barPercentage: 0.6 // 控制長條圖的粗細
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false // 隱藏圖例（因為原圖沒有圖例）
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 60, // 設定 Y 軸最大值
+                        ticks: {
+                            stepSize: 10 // Y 軸每隔 10 一個刻度
+                        },
+                        grid: {
+                            color: '#eaeaea' // 背景水平線顏色
+                        }
+                    },
+                    x: {
+                        grid: {
+                            display: false // 隱藏直線網格
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
